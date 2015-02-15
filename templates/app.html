@@ -22,6 +22,7 @@
 				$(".output").fadeOut();
 				$("#check").hide();
 				$(".prompt-text").text("");
+				$(".mini-prompt-text-container").hide();
 
 				// fade out, fade in and begin speech recognition
 
@@ -56,9 +57,16 @@
 												});
 											});
 										}, 1500);
-											data = JSON.parse(jsonData);
+
+										data = JSON.parse(jsonData);
+										if(mathOutput == "") {
 											mathOutput = data["output"];
-											pairs = data["pairs"];
+										}
+										else {
+											mathOutput += "\\\\ \n" + data["output"];
+										}
+										
+										pairs = data["pairs"];
 									});
 								});
 							}
@@ -155,6 +163,9 @@
 		</div>
 		<div class="output">
 			<h4 class="light centered">Statement Output</h4>
+			<div class="centered mini-prompt-text-container">
+				<h2 class="mini-prompt-text"></h2> 
+			</div>
 			<div class="col-md-2"></div>
 			<div class="col-md-4">
 				<p><b>Rendered Output</b></p>
