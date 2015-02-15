@@ -6,7 +6,7 @@ def clean(text):
 	"roots": "root", 
 	"square root": "squareroot",
 	"end": "n",
-	"are": "r",
+	"are": "r " ,
 	"each": "e",
 	"tx": "dx",
 	"girl": "integral",
@@ -16,21 +16,26 @@ def clean(text):
 	"love": "of",
 	"and": "n", "capitalize":"capital I",
    "factor":"vector","ed":"e",".":" dot",
-   "me":"mu","psy ":"psi ","psychology get":"psi conjugate","":""}
+   "me":"mu","psy ":"psi ","psychology get":"psi conjugate",
+   "age":"h","@":"at","goes to":"approaches", 
+   "divided by":"over", "roh":"rho","dvd":"dv",
+   "eat":"e","sign":"sine","effects":"of x"}
 
 	pairs = []
 
-	for key in dictionary.keys():
-		try:
-			i = text.index(" " + key)
-		except:
-			try:
-				j = text.index(key + " ")
+   for key in dictionary.keys():
+      try:
+         i = text.index(" " + key)
+      except:
+         try:
+            j = text.index(key + " ")
 			except:
-				pass
+            pass
 			else:
-				continue
-		else:
+            pairs.append([key, dictionary[key]])
+            text = text.replace(key + " ", dictionary[key] + " ")
+            text = text.replace(" " + key, " " + dictionary[key])
+      else:
 			pairs.append([key, dictionary[key]])
 			text = text.replace(key + " ", dictionary[key] + " ")
 			text = text.replace(" " + key, " " + dictionary[key])
