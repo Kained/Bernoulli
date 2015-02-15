@@ -1,5 +1,4 @@
 def clean(text):
-
 	text = text.lower()
 
 	dictionary = {"andover": "n over", 
@@ -18,24 +17,24 @@ def clean(text):
    "factor":"vector","ed":"e",".":" dot",
    "me":"mu","psy ":"psi ","psychology get":"psi conjugate",
    "age":"h","@":"at","goes to":"approaches", 
-   "divided by":"over", "roh":"rho","dvd":"dv",
+   "divided by":"over", "roh":"rho", "road": "rho", "dvd":"dv",
    "eat":"e","sign":"sine","effects":"of x"}
 
 	pairs = []
 
-   for key in dictionary.keys():
-      try:
-         i = text.index(" " + key)
-      except:
-         try:
-            j = text.index(key + " ")
+	for key in dictionary.keys():
+		try:
+			i = text.index(" " + key)
+		except:
+			try:
+				j = text.index(key + " ")
 			except:
-            pass
+				pass
 			else:
-            pairs.append([key, dictionary[key]])
-            text = text.replace(key + " ", dictionary[key] + " ")
-            text = text.replace(" " + key, " " + dictionary[key])
-      else:
+				pairs.append([key, dictionary[key]])
+				text = text.replace(key + " ", dictionary[key] + " ")
+				text = text.replace(" " + key, " " + dictionary[key])
+		else:
 			pairs.append([key, dictionary[key]])
 			text = text.replace(key + " ", dictionary[key] + " ")
 			text = text.replace(" " + key, " " + dictionary[key])
