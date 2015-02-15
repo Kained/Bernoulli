@@ -75,6 +75,11 @@ for s in st:
       st[st.index("squared")] = "^2"
    if s =="cubed":
       st[st.index("cubed")] = "^3"
+   if s =="d":
+      i=st.index("d")
+      if st[i+1][0] == "d":
+        st[i] = "\\frac{d}{" + st[i+1] + "}" 
+        del st[i+1]
 
 string_output = ""
 for s in st:
