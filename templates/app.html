@@ -39,6 +39,7 @@
 											$(".prompt").fadeOut(1000, function() {
 												$(".output").fadeIn(function() {
 													$(".output-container").text("$$" + mathOutput + "$$");
+													$(".output-editor-textarea").val(mathOutput);
 													MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 												});
 											});
@@ -145,7 +146,7 @@
 			</div>
 			<div class="col-md-4">
 				<div class="output-editor">
-					<textarea>
+					<textarea class="output-editor-textarea">
 
 					</textarea>
 				</div>
