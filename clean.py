@@ -9,8 +9,7 @@ def clean(text):
 	"are": "r",
 	"each": "e"}
 
-	text = text.replace("andover", "n over")
-	text = text.replace("roots", "root")
-	text = text.replace("square root", "squareroot")
+	for key in dictionary.keys():
+		text = text.replace(key, dictionary[key])
 
 	return text
