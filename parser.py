@@ -289,7 +289,7 @@ def parse(string):
       if s=="comma":
          st[st.index("comma")] = ","
       if s=="at":
-         st[st.index("at")] = "\mid_{"
+         st[st.index("at")] = "\\mid_{"
       if s=="epsilon":
          st[st.index("epsilon")] = "\\epsilon"
       if s=="zeta":
@@ -319,9 +319,9 @@ def parse(string):
       if s=="sigma":
          st[st.index("sigma")] = "\\sigma"
       if s=="upsilon":
-         st[st.index("upsilon")] = ","
+         st[st.index("upsilon")] = "\\upsilon"
       if s=="phi":
-         st[st.index("phi")] = "mid_{"
+         st[st.index("phi")] = "\\phi"
       if s=="chi":
          st[st.index("chi")] = "\\chi"
       if s=="omega":
