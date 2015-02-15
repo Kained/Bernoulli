@@ -97,7 +97,10 @@ def parse(string):
          i=st.index("is")
          if st[i+1] == "equal":
             st[i+1:i+3] = ""
-         st[i] = "={"
+         if (st[i+1] == "less") | (st[i+1] == "greater"):
+            st[i] = ""
+         else:
+            st[i] = "={"
       if s =="tau":
          st[st.index("tau")] = "\\tau "
       if s =="squareroot":
@@ -146,7 +149,7 @@ def parse(string):
          if st[i+1] == "derivative": # first derivative of y with respect to/ in terms of x
             if (st[i+5] == "respect") | (st[i+6] == "terms"):
                st[i] = "\\frac{d "+ st[i+3]  +"}{d"+st[i+7]+"}"
-               st[i+1:i+7] = ""
+               st[i+1:i+8] = ""
             else: # assume in terms of x 
                st[i] = "\\frac{d}{dx}"
                st[i+1:i+3] = ""      
@@ -167,10 +170,21 @@ def parse(string):
          if st[i+1] == "derivative":
             if (st[i+5] == "respect") | (st[i+5] == "terms"):    
                st[i] = "\\frac{d "+ st[i+3]  +"}{d"+st[i+7]+"}"
-               st[i+1:i+7] = ""  
+               st[i+1:i+8] = ""  
             else: 
                st[i] = "\\frac{d}{dx}"    
                st[i+1:i+3] = ""     
+      if s=="partial":
+         i=st.index("partial")
+         if st[i+1] == "derivative": # first derivative of y with respect to/ in terms of x
+            if (st[i+5] == "respect") | (st[i+6] == "terms"):
+               st[i] = "\\frac{\partial "+ st[i+3]  +"}{\partial "+st[i+7]+"}"
+               st[i+1:i+8] = ""
+            else: # assume in terms of x 
+               st[i] = "\\frac{\partial}{\partial x}"
+               st[i+1:i+3] = ""
+
+
       if s=="conjugate":
          st[st.index("conjugate")] = "^*"
       if s=="absolute":
@@ -272,6 +286,14 @@ def parse(string):
             else:
                st[i] = ">"
                st[i+1:i+3]=""
+      if s=="comma":
+         st[st.index("comma")] = ","
+      if s=="at":
+         st[st.index("at")] = "\mid_{"
+
+
+
+
 
    string_output = ""
    for s in st:
