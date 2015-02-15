@@ -3,14 +3,12 @@ integral from one to r of e to the x dx
 d dx of one over n minus one
 the curl of vector v is zero
 tau equals vector r cross f
-<<<<<<< HEAD
 the second derivative of x in terms of t is equal to the acceleration a
 x double dot equals a
 psi times its conjugate is the absolute value of psi squared
 the unit vector i is x hat
 capital e sub n is the thirteen point six
 capital R sub two is four a naught
-=======
 second derivate of sin of x
 the limit as n approaches infinity of n over n - 1
 the partial derivative of f(x, y) with respect to y at (x0, y0)
@@ -21,4 +19,4 @@ curly bracket x squared close curly bracket
 square bracket x squared close curly bracket
 5 is less than or equal to x is less than or equal to 8
 set builder: 5 is less than or equal to x is less than or equal to 8
->>>>>>> ba11fcf9271813623080e9a27d906230d3658976
+
