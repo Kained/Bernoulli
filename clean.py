@@ -30,6 +30,7 @@ def clean(text):
 				continue
 		else:
 			pairs.append([key, dictionary[key]])
-			text = text.replace(key, dictionary[key])
+			text = text.replace(key + " ", dictionary[key] + " ")
+			text = text.replace(" " + key, " " + dictionary[key])
 
 	return [text, pairs]
