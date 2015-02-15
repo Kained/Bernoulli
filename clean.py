@@ -12,7 +12,9 @@ def clean(text):
 	"girl": "integral",
 	"song": "sum",
 	"son": "sum",
-	"x-squared": "x squared"}
+	"x-squared": "x squared",
+	"love": "of",
+	"and": "n"}
 
 	pairs = []
 
