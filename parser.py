@@ -28,7 +28,7 @@ def parse(string):
          st[st.index("of")] = "{"
       if s =="negative":
          st[st.index("negative")] = "-"
-     
+
       if s =="over":
          st[st.index("over")] = "\\over "
       if s =="curl":
@@ -82,8 +82,8 @@ def parse(string):
       if s =="tau":
          st[st.index("tau")] = "\\tau "
 
-      string_output = ""
-      for s in st:
-         string_output+=s
+   string_output = ""
+   for s in st:
+      string_output+=s
 
-      return string_output+(string_output.count("{")-string_output.count("{"))*"}"
+   return string_output+(string_output.count("{")-string_output.count("}"))*"}"
