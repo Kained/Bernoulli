@@ -76,14 +76,61 @@ def parse(string):
          i=st.index("d")
          if st[i+1][0] == "d":
            st[i] = "\\frac{d}{" + st[i+1] + "}" 
-           del st[i+1]
+           st[i+1] = ""
       if s =="is":
          st[st.index("is")] = "="
       if s =="tau":
          st[st.index("tau")] = "\\tau "
+      if s =="squareroot":
+         st[st.index("squareroot")] = "\\sqrt "
+      if s =="alpha":
+         st[st.index("alpha")] = "\\alpha "
+      if s =="double":
+         i = st.index("double")
+         if st[i+1] == "dot":
+            st[i-1]="\ddot " + st[i-1]
+            st[i] = ""
+            st[i+1] = ""
+      if s =="beta":
+         st[st.index("beta")] = "\\beta "
+      if s =="squareroot":
+         st[st.index("squareroot")] = "\\sqrt "
+      if s =="gamma":
+         st[st.index("gamma")] = "\\gamma "
+      if s =="unit":
+         i=st.index("unit")
+         if st[i+1] == "vector":
+            st[i+2] = "\\hat "+st[i+2]
+         st[i] = ""
+         st[i+1] = ""
+      if s =="hat":
+         i=st.index("hat")
+         st[i-1] = "\\hat "+st[i-1]
+         st[i] = ""
+      if s =="gamma":
+         st[st.index("gamma")] = "\\gamma "
+
+      if s=="capital":
+         i=st.index("capital")
+         st[i+1] = st[i+1].upper()
+         st[i] = ""
+      if s=="sub":
+         st[st.index("sub")] = "_"
+      if s=="point":
+         st[st.index("point")] = "."
+      if s=="dot": # This is why we unit test
+         st[st.index("dot")] = "\cdot "
+      if s=="times":
+         st[st.index("times")] = "*" # personal preference, be quiet
+
 
    string_output = ""
    for s in st:
       string_output+=s
 
-   return string_output+(string_output.count("{")-string_output.count("}"))*"}"
+   string_output+=(string_output.count("{")-string_output.count("}"))*"}"
+   #print string_output #only for testing
+   return string_output
+
+
+#parse(sys.argv[1]) #ONLY FOR TESTING
