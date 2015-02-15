@@ -17,7 +17,17 @@ def clean(text):
 	pairs = []
 
 	for key in dictionary.keys():
-		pairs.append([key, dictionary[key]])
-		text = text.replace(key, dictionary[key])
+		try:
+			i = text.index(" " + key)
+		except:
+			try:
+				j = text.index(key + " ")
+			except:
+				pass
+			else:
+				continue
+		else:
+			pairs.append([key, dictionary[key]])
+			text = text.replace(key, dictionary[key])
 
 	return [text, pairs]

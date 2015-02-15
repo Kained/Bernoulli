@@ -47,7 +47,7 @@
 
 													for(var i = 0; i < pairs.length; i++) {
 														var li = document.createElement("li");
-														li.appendChild(document.createTextNode('We detected "' + pairs[0] + '", but we think you meant "' + pairs[1] + '".'));
+														li.appendChild(document.createTextNode('We detected "' + pairs[i][0] + '", but we think you meant "' + pairs[i][1] + '".'));
 														$("#pairs").append(li);
 													}
 
