@@ -11,14 +11,15 @@ def clean(text):
 	"girl": "integral",
 	"song": "sum",
 	"son": "sum",
+	"x-square": "x squared",
 	"x-squared": "x squared",
 	"love": "of",
 	"and": "n", "capitalize":"capital I",
-   "factor":"vector","ed":"e",".":" dot",
+   "factor":"vector",".":" dot",
    "me":"mu","psy ":"psi ","psychology get":"psi conjugate",
    "age":"h","@":"at","goes to":"approaches", 
    "divided by":"over", "roh":"rho", "road": "rho", "dvd":"dv",
-   "eat":"e","sign":"sine","effects":"of x","e2":"e to"}
+   "eat":"e","sign":"sine","effects":"of x","e2":"e to", "art": "r", "my": "y"}
 
 	dictionary2 = {"square root": "squareroot", "psychology get":"psi conjugate"}
 
