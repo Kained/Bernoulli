@@ -1,17 +1,47 @@
 <html>
 	<head>
 		<title>Bernoulli | Math reimagined.</title>
-		<script src="/static/js/bootstrap.min.js"></script>
 		<script src="/static/js/jquery.js"></script>
 		<script>
 		$(function() {
-			
+			$("#start").click(function() {
+				var recognition = new webkitSpeechRecognition();
+				recognition.continuous = true;
+				recognition.interimResults = true;
+				recognition.onresult = function(event) {
+					var results = event["results"];
+					if(results[0]["isFinal"] == true) {
+						console.log(results[0][0]["transcript"]);
+					}
+					else {
+						console.log("(interim) " + results[0][0]["transcript"]);
+					}
+				}
+				recognition.start();
+			});
 		});
 		</script>
+		<script src="/static/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+		<style>
+		.top-bar {
+			background-color:#e6ffd8;
+			height:20%;
+		}
+		</style>
 	</head>
 	<body>
-		<h1>Bernoulli</h1>
-		<p>Math reimagined.</p>
+		<div class="top-bar">
+		&nbsp;
+		</div>
+		<div class="mid-bar">
+			<div class="col-md-4"></div>
+			<div class="col-md-4">
+				<h1>Bernoulli</h1>
+				<p class="lead">Math reimagined.</p>
+				<a href="#" class="btn btn-success" id="start">Go</a>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
 	</body>
 </html>
