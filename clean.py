@@ -20,25 +20,26 @@ def clean(text):
    "divided by":"over", "roh":"rho", "road": "rho", "dvd":"dv",
    "eat":"e","sign":"sine","effects":"of x","e2":"e to"}
 
-   dictionary2 = {"square root": "squareroot", "psychology get":"psi conjugate"}
+	dictionary2 = {"square root": "squareroot", "psychology get":"psi conjugate"}
 
 	pairs = []
-   for key in dictionary2.keys():
-      try:
-         i = text.index(" " + key)
-      except:
-         try:
-            j = text.index(key + " ")
-         except:
-            pass
-         else:
-            pairs.append([key, dictionary[key]])
-            text = text.replace(key + " ", dictionary[key] + " ")
-            text = text.replace(" " + key, " " + dictionary[key])
-      else:
-         pairs.append([key, dictionary[key]])
-         text = text.replace(key + " ", dictionary[key] + " ")
-         text = text.replace(" " + key, " " + dictionary[key])
+
+	for key in dictionary2.keys():
+		try:
+			i = text.index(" " + key)
+		except:
+			try:
+				j = text.index(key + " ")
+			except:
+				pass
+			else:
+				pairs.append([key, dictionary[key]])
+				text = text.replace(key + " ", dictionary[key] + " ")
+				text = text.replace(" " + key, " " + dictionary[key])
+		else:
+			pairs.append([key, dictionary[key]])
+			text = text.replace(key + " ", dictionary[key] + " ")
+			text = text.replace(" " + key, " " + dictionary[key])
 
 
 	for key in dictionary.keys():
