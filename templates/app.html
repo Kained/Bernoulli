@@ -2,8 +2,18 @@
 	<head>
 		<title>Bernoulli | Math reimagined.</title>
 		<script src="/static/js/jquery.js"></script>
+		<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 		<script>
 		$(function() {
+			var mathOutput = "";
+			MathJax.Hub.Config({
+			    tex2jax: {
+			      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+			      displayMath: [ ['$$', '$$']]
+			    },
+			  });
 			$("#check").hide();
 			$(".prompt").hide();
 			$(".output").hide();
@@ -24,14 +34,18 @@
 								$(".prompt-text").text(results[0][0]["transcript"]);
 								$("#check").fadeIn(500, function() {
 									recognition.stop();
-									$.post('/parse', {'text': $(".prompt-text").text()}, function(data) {
-										console.log(data);
+									$.post('/parse', {'text': $(".prompt-text").text()}, function(jsonData) {
+											setTimeout(function() {
+											$(".prompt").fadeOut(1000, function() {
+												$(".output").fadeIn(function() {
+													$(".output-container").text("$$" + mathOutput + "$$");
+													MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+												});
+											});
+										}, 1500);
+											data = JSON.parse(jsonData);
+											mathOutput = data["output"];
 									});
-									setTimeout(function() {
-										$(".prompt").fadeOut(1000, function() {
-											$(".output").fadeIn();
-										});
-									}, 1500);
 								});
 							}
 							else {
