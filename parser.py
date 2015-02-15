@@ -19,7 +19,7 @@ def parse(string):
       if s =="integral":
          st[st.index("integral")] = "\\int "
       if s =="gradient":
-         st[st.index("gradient")] = "\\del "
+         st[st.index("gradient")] = "\\nabla "
       if s =="from":
          st[st.index("from")] = "_"
       if s =="to":
