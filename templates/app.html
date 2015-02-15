@@ -24,6 +24,9 @@
 								$(".prompt-text").text(results[0][0]["transcript"]);
 								$("#check").fadeIn(500, function() {
 									recognition.stop();
+									$.post('/parse', {'text': $(".prompt-text").text()}, function(data) {
+										console.log(data);
+									});
 									setTimeout(function() {
 										$(".prompt").fadeOut(1000, function() {
 											$(".output").fadeIn();
@@ -101,7 +104,7 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
 				<h1 class="bold">Bernoulli</h1>
-				<p class="lead">Math reimagined.</p>
+				<p class="lead">Math reimagined. Bernoulli turns spoken math into text.</p>
 				<a href="#" class="btn btn-success" id="start">Get started</a>
 				<p id="gray">Created for CodeDay Detroit Winter 2015 by Amit Mizrahi, Brendan Gimby and Prathik Hosalli.</p>
 			</div>

@@ -9,7 +9,7 @@ import parser
 def hello_world():
 	return render_template('app.html')
 
-@app.route('/parse')
+@app.route('/parse', methods=['POST'])
 def parse():
 	text = request.form["text"]
 	return json.dumps({'output': parser.parse(text)})
