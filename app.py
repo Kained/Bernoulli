@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request
-app = Flask(__name__)
+from flask.ext.heroku import Heroku
 
-app.debug = True
+app = Flask(__name__)
+heroku = Heroku(app)
 
 import json
 
