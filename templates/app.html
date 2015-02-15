@@ -4,6 +4,7 @@
 		<script src="/static/js/jquery.js"></script>
 		<script>
 		$(function() {
+			$("#check").hide();
 			$(".prompt").hide();
 			$("#start").click(function() {
 
@@ -18,10 +19,13 @@
 						recognition.onresult = function(event) {
 							var results = event["results"];
 							if(results[0]["isFinal"] == true) {
-								console.log(results[0][0]["transcript"]);
+								$(".prompt-text").css("color", "#000000");
+								$(".prompt-text").text(results[0][0]["transcript"]);
+								$("#check").fadeIn(500);
 							}
 							else {
-								console.log("(interim) " + results[0][0]["transcript"]);
+								$(".prompt-text").css("color", "#888888");
+								$(".prompt-text").text(results[0][0]["transcript"]);
 							}
 						}
 						recognition.start();
@@ -56,6 +60,9 @@
 			width:256px;
 			margin-top:40px;
 		}
+		.prompt-text-container {
+			text-align:center;
+		}
 		</style>
 	</head>
 	<body>
@@ -75,6 +82,10 @@
 			<h2 class="light centered">Allow access to your microphone and begin speaking.</h2>
 			<div class="prompt-image">
 				<img src="/static/img/mic.png">
+			</div>
+			<div class="prompt-text-container">
+				<h2 class="prompt-text"></h2> 
+				<img src="/static/img/check.png" id="check">
 			</div>
 		</div>
 	</body>
