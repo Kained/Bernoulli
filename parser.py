@@ -49,8 +49,16 @@ def parse(string):
          st[st.index("over")] = "\\over " + (k)*"}"
       if s =="curl":
          st[st.index("curl")] = "\\del\\cdot "
-      if (s =="equals")|(s=="equal"):
-         st[st.index("equals")] = "={"
+      if (s =="equals"):
+         i=0
+         j=0
+         for str in st:
+            i+=str.count("{")
+            j+=str.count("}")
+            k=i-j # close all
+         if k<0:
+            k=0
+         st[st.index("equals")] = "}"*k+"={"
       if s =="vector":
          st[st.index("vector")] = "\\vec "
       if s =="cross":
