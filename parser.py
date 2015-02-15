@@ -19,7 +19,7 @@ def parse(string):
       if s =="integral":
          st[st.index("integral")] = "\\int "
       if s =="gradient":
-         st[st.index("gradient")] = "\\del "
+         st[st.index("gradient")] = "\\nabla "
       if s =="from":
          st[st.index("from")] = "_"
       if s =="to":
@@ -49,7 +49,7 @@ def parse(string):
          st[st.index("over")] = "\\over " + (k)*"}"
       if s =="curl":
          st[st.index("curl")] = "\\del\\cdot "
-      if s =="equals":
+      if (s =="equals")|(s=="equal"):
          st[st.index("equals")] = "={"
       if s =="vector":
          st[st.index("vector")] = "\\vec "
@@ -187,11 +187,11 @@ def parse(string):
 
       if s=="conjugate":
          st[st.index("conjugate")] = "^*"
-      if s=="absolute":
-         i=st.index("absolute")
-         if st[i+1] == "value":
-            st[i] = "\\abs{"
-            st[i+1] = ""
+#     if s=="absolute":                   ## No absolute value support
+#        i=st.index("absolute")
+#        if st[i+1] == "value":
+#           st[i] = "\\bigr |" 
+#           st[i+1:i+3] = ""
       if s=="not":   
          st[st.index("not")] = "_0 "     
       if s=="sine":
@@ -287,50 +287,49 @@ def parse(string):
                st[i] = ">"
                st[i+1:i+3]=""
       if s=="comma":
-         st[st.index("comma")] = ","
+         st[st.index("comma")] = ", "
       if s=="at":
-         st[st.index("at")] = "\\mid_{"
-      if s=="epsilon":
-         st[st.index("epsilon")] = "\\epsilon"
+         st[st.index("at")] = "\\mid_{ "
       if s=="zeta":
-         st[st.index("zeta")] = "\\zeta"
+         st[st.index("zeta")] = "\\zeta "
       if s=="eta":
-         st[st.index("eta")] = "\\eta"
+         st[st.index("eta")] = "\\eta "
       if s=="theta":
-         st[st.index("theta")] = "\\theta"
+         st[st.index("theta")] = "\\theta "
       if s=="iota":
-         st[st.index("iota")] = "\\iota"
+         st[st.index("iota")] = "\\iota "
       if s=="kappa":
-         st[st.index("kappa")] = "\\kappa"
+         st[st.index("kappa")] = "\\kappa "
       if s=="lambda":
-         st[st.index("lambda")] = "\\lambda"
+         st[st.index("lambda")] = "\\lambda "
       if s=="mu":
-         st[st.index("mu")] = "\\mu"
+         st[st.index("mu")] = "\\mu "
       if s=="nu":
-         st[st.index("nu")] = "\\nu"
+         st[st.index("nu")] = "\\nu "
       if s=="xi":
-         st[st.index("xi")] = "\\xi"
+         st[st.index("xi")] = "\\xi "
       if s=="omicron":
-         st[st.index("omicron")] = "\\omicron"
+         st[st.index("omicron")] = "\\omicron "
       if s=="pi":
-         st[st.index("pi")] = "\\pi"
+         st[st.index("pi")] = "\\pi "
       if s=="rho":
-         st[st.index("rho")] = "\\rho"
+         st[st.index("rho")] = "\\rho "
       if s=="sigma":
-         st[st.index("sigma")] = "\\sigma"
+         st[st.index("sigma")] = "\\sigma "
       if s=="upsilon":
-         st[st.index("upsilon")] = "\\upsilon"
+         st[st.index("upsilon")] = "\\upsilon "
       if s=="phi":
-         st[st.index("phi")] = "\\phi"
+         st[st.index("phi")] = "\\phi "
       if s=="chi":
-         st[st.index("chi")] = "\\chi"
+         st[st.index("chi")] = "\\chi "
       if s=="omega":
-         st[st.index("omega")] = "\\omega"
+         st[st.index("omega")] = "\\omega "
       if s=="sigma":
-         st[st.index("sigma")] = "\\sigma"
+         st[st.index("sigma")] = "\\sigma "
       if s=="delta":
-         st[st.index("delta")] = "\\delta"
-
+         st[st.index("delta")] = "\\delta "
+      if s=="plus":
+         st[st.index("plus")] = "+"
 
 
 
