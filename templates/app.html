@@ -4,20 +4,29 @@
 		<script src="/static/js/jquery.js"></script>
 		<script>
 		$(function() {
+			$(".prompt").hide();
 			$("#start").click(function() {
-				var recognition = new webkitSpeechRecognition();
-				recognition.continuous = true;
-				recognition.interimResults = true;
-				recognition.onresult = function(event) {
-					var results = event["results"];
-					if(results[0]["isFinal"] == true) {
-						console.log(results[0][0]["transcript"]);
-					}
-					else {
-						console.log("(interim) " + results[0][0]["transcript"]);
-					}
-				}
-				recognition.start();
+
+				// fade out, fade in and begin speech recognition
+
+				$(".mid-bar").fadeOut(500, function() {
+					$(".top-bar").animate({"height": "33px"}, function() {
+						$(".prompt").show();
+						var recognition = new webkitSpeechRecognition();
+						recognition.continuous = true;
+						recognition.interimResults = true;
+						recognition.onresult = function(event) {
+							var results = event["results"];
+							if(results[0]["isFinal"] == true) {
+								console.log(results[0][0]["transcript"]);
+							}
+							else {
+								console.log("(interim) " + results[0][0]["transcript"]);
+							}
+						}
+						recognition.start();
+					});
+				});
 			});
 		});
 		</script>
@@ -35,6 +44,12 @@
 		body {
 			font-family:"Roboto Slab";
 		}
+		.light {
+			font-weight:100;
+		}
+		.centered {
+			text-align:center;
+		}
 		</style>
 	</head>
 	<body>
@@ -49,6 +64,9 @@
 				<a href="#" class="btn btn-success" id="start">Get started</a>
 			</div>
 			<div class="col-md-4"></div>
+		</div>
+		<div class="prompt">
+			<h2 class="light centered">Allow access to your microphone and begin speaking.</h2>
 		</div>
 	</body>
 </html>
