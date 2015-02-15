@@ -80,9 +80,15 @@ for s in st:
       if st[i+1][0] == "d":
         st[i] = "\\frac{d}{" + st[i+1] + "}" 
         del st[i+1]
+   if s =="is":
+      st[st.index("is")] = "="
+   if s =="tau":
+      st[st.index("tau")] = "\\tau "
+
+
 
 string_output = ""
 for s in st:
 	string_output+=s
 
-print string_output+"}"
+print string_output+(string_output.count("{")-string_output.count("{"))*"}"
