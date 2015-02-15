@@ -4,29 +4,85 @@
 		<script src="/static/js/jquery.js"></script>
 		<script>
 		$(function() {
+			$("#check").hide();
+			$(".prompt").hide();
+			$(".output").hide();
 			$("#start").click(function() {
-				var recognition = new webkitSpeechRecognition();
-				recognition.continuous = true;
-				recognition.interimResults = true;
-				recognition.onresult = function(event) {
-					var results = event["results"];
-					if(results[0]["isFinal"] == true) {
-						console.log(results[0][0]["transcript"]);
-					}
-					else {
-						console.log("(interim) " + results[0][0]["transcript"]);
-					}
-				}
-				recognition.start();
+
+				// fade out, fade in and begin speech recognition
+
+				$(".mid-bar").fadeOut(500, function() {
+					$(".top-bar").animate({"height": "33px"}, function() {
+						$(".prompt").show();
+						var recognition = new webkitSpeechRecognition();
+						recognition.continuous = true;
+						recognition.interimResults = true;
+						recognition.onresult = function(event) {
+							var results = event["results"];
+							if(results[0]["isFinal"] == true) {
+								$(".prompt-text").css("color", "#000000");
+								$(".prompt-text").text(results[0][0]["transcript"]);
+								$("#check").fadeIn(500, function() {
+									recognition.stop();
+									setTimeout(function() {
+										$(".prompt").fadeOut(1000, function() {
+											$(".output").fadeIn();
+										});
+									}, 1500);
+								});
+							}
+							else {
+								$(".prompt-text").css("color", "#888888");
+								$(".prompt-text").text(results[0][0]["transcript"]);
+							}
+						}
+						recognition.start();
+					});
+				});
 			});
 		});
 		</script>
 		<script src="/static/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
+		<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:100,400,500' rel='stylesheet' type='text/css'>
 		<style>
 		.top-bar {
 			background-color:#e6ffd8;
 			height:20%;
+		}
+		.bold {
+			font-weight:500;
+		}
+		body {
+			font-family:"Roboto Slab";
+		}
+		.light {
+			font-weight:100;
+		}
+		.centered {
+			text-align:center;
+		}
+		.prompt-image {
+			margin-left:auto;
+			margin-right:auto;
+			width:256px;
+			margin-top:40px;
+		}
+		.prompt-text-container {
+			text-align:center;
+		}
+		.output-container {
+			margin-top:20px;
+			border:2px solid #888888;
+			webkit-border-radius:5px;
+			height:80%;
+		}
+		.output-editor {
+			margin-top:20px;
+		}
+		.output-editor textarea {
+			height:80%;
+			width:100%;
 		}
 		</style>
 	</head>
@@ -37,11 +93,39 @@
 		<div class="mid-bar">
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
-				<h1>Bernoulli</h1>
+				<h1 class="bold">Bernoulli</h1>
 				<p class="lead">Math reimagined.</p>
-				<a href="#" class="btn btn-success" id="start">Go</a>
+				<a href="#" class="btn btn-success" id="start">Get started</a>
 			</div>
 			<div class="col-md-4"></div>
+		</div>
+		<div class="prompt">
+			<h2 class="light centered">Allow access to your microphone and begin speaking.</h2>
+			<div class="prompt-image">
+				<img src="/static/img/mic.png">
+			</div>
+			<div class="prompt-text-container">
+				<h2 class="prompt-text"></h2> 
+				<img src="/static/img/check.png" id="check">
+			</div>
+		</div>
+		<div class="output">
+			<h4 class="light">Statement Output</h4>
+			<div class="col-md-2"></div>
+			<div class="col-md-4">
+				<div class="output-container">
+
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="output-editor">
+					<textarea>
+
+					</textarea>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+			<a href="#" class="btn btn-success" id="start">Try another</a>
 		</div>
 	</body>
 </html>
