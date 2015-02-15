@@ -17,7 +17,7 @@ def parse(string):
       if s =="infinity":
          st[st.index("infinity")] = "\\infty "
       if s =="integral":
-         st[st.index("integral")] = "\\integral "
+         st[st.index("integral")] = "\\int "
       if s =="gradient":
          st[st.index("gradient")] = "\\del "
       if s =="from":
