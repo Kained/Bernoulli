@@ -5,7 +5,7 @@ def clean(text):
 	"roots": "root", 
 	"square root": "squareroot",
 	"end": "n",
-	"are": "r " ,
+	" are ": "r" ,
 	"each": "e",
 	"tx": "dx",
 	"girl": "integral",
@@ -18,9 +18,28 @@ def clean(text):
    "me":"mu","psy ":"psi ","psychology get":"psi conjugate",
    "age":"h","@":"at","goes to":"approaches", 
    "divided by":"over", "roh":"rho", "road": "rho", "dvd":"dv",
-   "eat":"e","sign":"sine","effects":"of x"}
+   "eat":"e","sign":"sine","effects":"of x","e2":"e to"}
+
+   dictionary2 = {"square root": "squareroot", "psychology get":"psi conjugate"}
 
 	pairs = []
+   for key in dictionary2.keys():
+      try:
+         i = text.index(" " + key)
+      except:
+         try:
+            j = text.index(key + " ")
+         except:
+            pass
+         else:
+            pairs.append([key, dictionary[key]])
+            text = text.replace(key + " ", dictionary[key] + " ")
+            text = text.replace(" " + key, " " + dictionary[key])
+      else:
+         pairs.append([key, dictionary[key]])
+         text = text.replace(key + " ", dictionary[key] + " ")
+         text = text.replace(" " + key, " " + dictionary[key])
+
 
 	for key in dictionary.keys():
 		try:
