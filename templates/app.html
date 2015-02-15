@@ -6,6 +6,7 @@
 		$(function() {
 			$("#check").hide();
 			$(".prompt").hide();
+			$(".output").hide();
 			$("#start").click(function() {
 
 				// fade out, fade in and begin speech recognition
@@ -21,7 +22,14 @@
 							if(results[0]["isFinal"] == true) {
 								$(".prompt-text").css("color", "#000000");
 								$(".prompt-text").text(results[0][0]["transcript"]);
-								$("#check").fadeIn(500);
+								$("#check").fadeIn(500, function() {
+									recognition.stop();
+									setTimeout(function() {
+										$(".prompt").fadeOut(1000, function() {
+											$(".output").fadeIn();
+										});
+									}, 1500);
+								});
 							}
 							else {
 								$(".prompt-text").css("color", "#888888");
@@ -63,6 +71,19 @@
 		.prompt-text-container {
 			text-align:center;
 		}
+		.output-container {
+			margin-top:20px;
+			border:2px solid #888888;
+			webkit-border-radius:5px;
+			height:80%;
+		}
+		.output-editor {
+			margin-top:20px;
+		}
+		.output-editor textarea {
+			height:80%;
+			width:100%;
+		}
 		</style>
 	</head>
 	<body>
@@ -87,6 +108,24 @@
 				<h2 class="prompt-text"></h2> 
 				<img src="/static/img/check.png" id="check">
 			</div>
+		</div>
+		<div class="output">
+			<h4 class="light">Statement Output</h4>
+			<div class="col-md-2"></div>
+			<div class="col-md-4">
+				<div class="output-container">
+
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="output-editor">
+					<textarea>
+
+					</textarea>
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+			<a href="#" class="btn btn-success" id="start">Try another</a>
 		</div>
 	</body>
 </html>
