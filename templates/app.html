@@ -44,6 +44,13 @@
 												$(".output").fadeIn(function() {
 													$(".output-container").text("$$" + mathOutput + "$$");
 													$(".output-editor-textarea").val(mathOutput);
+
+													for(var i = 0; i < pairs.length; i++) {
+														var li = document.createElement("li");
+														li.appendChild(document.createTextNode('We detected "' + pairs[0] + '", but we think you meant "' + pairs[1] + '".'));
+														$("#pairs").append(li);
+													}
+
 													MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 													$("#another").click(startProcess);
 												});
@@ -51,6 +58,7 @@
 										}, 1500);
 											data = JSON.parse(jsonData);
 											mathOutput = data["output"];
+											pairs = data["pairs"];
 									});
 								});
 							}
@@ -106,7 +114,7 @@
 			margin-top:20px;
 		}
 		.output-editor textarea {
-			height:80%;
+			height:40%;
 			width:100%;
 		}
 		#another {
@@ -161,6 +169,11 @@
 					<textarea class="output-editor-textarea">
 
 					</textarea>
+					<div class="output-editor-pairs">
+						<ul id="pairs">
+
+						</ul>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-2"></div>
