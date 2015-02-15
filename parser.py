@@ -25,16 +25,32 @@ def parse(string):
       if s =="to":
          st[st.index("to")] = "^"
       if s =="of":
-         st[st.index("of")] = "{"
+         i=0
+         j=0
+         for str in st:
+            i+=str.count("{")
+            j+=str.count("}")
+            k=i-j # close all
+         if k<0:
+            k=0
+         st[st.index("of")] =k*"}"+ "{"
       if s =="negative":
          st[st.index("negative")] = "-"
 
       if s =="over":
-         st[st.index("over")] = "\\over "
+         i=0
+         j=0
+         for str in st:
+            i+=str.count("{")
+            j+=str.count("}")
+            k=i-j-1 # close all but one
+         if k<0: 
+            k=0    
+         st[st.index("over")] = "\\over " + (k)*"}"
       if s =="curl":
          st[st.index("curl")] = "\\del\\cdot "
       if s =="equals":
-         st[st.index("equals")] = "="
+         st[st.index("equals")] = "={"
       if s =="vector":
          st[st.index("vector")] = "\\vec "
       if s =="cross":
@@ -78,7 +94,10 @@ def parse(string):
            st[i] = "\\frac{d}{" + st[i+1] + "}" 
            st[i+1] = ""
       if s =="is":
-         st[st.index("is")] = "="
+         i=st.index("is")
+         if st[i+1] == "equal":
+            st[i+1:i+3] = ""
+         st[i] = "={"
       if s =="tau":
          st[st.index("tau")] = "\\tau "
       if s =="squareroot":
@@ -112,7 +131,7 @@ def parse(string):
 
       if s=="capital":
          i=st.index("capital")
-         st[i+1] = st[i+1].upper()
+         st[i+1] = st[i+1][0].upper()
          st[i] = ""
       if s=="sub":
          st[st.index("sub")] = "_"
@@ -122,6 +141,76 @@ def parse(string):
          st[st.index("dot")] = "\cdot "
       if s=="times":
          st[st.index("times")] = "*" # personal preference, be quiet
+      if s=="first":
+         i=st.index("first")
+         if st[i+1] == "derivative": # first derivative of y with respect to/ in terms of x
+            if (st[i+5] == "respect") | (st[i+6] == "terms"):
+               st[i] = "\\frac{d "+ st[i+3]  +"}{d"+st[i+7]+"}"
+               st[i+1:i+7] = ""
+            else: # assume in terms of x 
+               st[i] = "\\frac{d}{dx}"
+               st[i+1:i+3] = ""      
+      if s=="second":
+         i=st.index("second")    
+         if st[i+1] == "derivative": 
+            if st[i+5] == "respect":    
+               st[i] = "\\frac{d "+ st[i+3]  +"}{d"+st[i+7]+"}"
+               st[i+1:i+8] = ["","","","","","",""]  
+            if st[i+5] == "terms":                     
+               st[i] = "\\frac{d "+ st[i+3]  +"}{d"+st[i+7]+"}"
+               st[i+1:i+8] = ["","","","","","",""]
+            else: 
+               st[i] = "\\frac{d}{dx}"    
+               st[i+1:i+3] = ""
+      if s=="third":
+         i=st.index("third")    
+         if st[i+1] == "derivative":
+            if (st[i+5] == "respect") | (st[i+5] == "terms"):    
+               st[i] = "\\frac{d "+ st[i+3]  +"}{d"+st[i+7]+"}"
+               st[i+1:i+7] = ""  
+            else: 
+               st[i] = "\\frac{d}{dx}"    
+               st[i+1:i+3] = ""     
+      if s=="conjugate":
+         st[st.index("conjugate")] = "^*"
+      if s=="absolute":
+         i=st.index("absolute")
+         if st[i+1] == "value":
+            st[i] = "\\abs{"
+            st[i+1] = ""
+      if s=="not":   
+         st[st.index("not")] = "_0 "     
+      if s=="sine":
+         st[st.index("sine")] = "\\sin "
+      if s=="cosine":
+         st[st.index("cosine")] = "\\cos "
+      if s=="tangent":
+         st[st.index("tangent")] = "\\tan "
+      if s=="arcsine":
+         st[st.index("arcsine")] = "\\arcsin "
+      if s=="arccosine":
+         st[st.index("arccosine")] = "\\arccos "
+      if s=="arctangent":
+         st[st.index("arctangent")] = "\\arctan "
+      if s=="secant":
+         st[st.index("secant")] = "\\sec "
+      if s=="cosecant":
+         st[st.index("cosecant")] = "\\csc "
+      if s=="cotangent":
+         st[st.index("cotangent")] = "\\cot "
+      if s=="arcsecant":
+         st[st.index("arcsecant")] = "\\arcsec "
+      if s=="arccosecant":
+         st[st.index("arccosecant")] = "\\arccsc "
+      if s=="arccotangent":
+         st[st.index("arccotangent")] = "\\arccot "
+      if s=="limit":
+         st[st.index("limit")] = "\\lim "
+      if s=="as":
+         st[st.index("as")] = "_{ "
+      if s=="approaches":
+         st[st.index("approaches")] = "\\rightarrow "
+
 
 
    string_output = ""
@@ -129,8 +218,8 @@ def parse(string):
       string_output+=s
 
    string_output+=(string_output.count("{")-string_output.count("}"))*"}"
-   #print string_output #only for testing
+   print string_output #only for testing
    return string_output
 
 
-#parse(sys.argv[1]) #ONLY FOR TESTING
+parse(sys.argv[1]) #ONLY FOR TESTING
