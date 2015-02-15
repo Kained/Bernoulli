@@ -12,6 +12,10 @@ import clean
 def hello_world():
 	return render_template('app.html')
 
+@app.route('/about')
+def about():
+	return render_template('about.html')
+
 @app.route('/parse', methods=['POST'])
 def parse():
 	text = request.form["text"]
