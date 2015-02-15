@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
+app.debug = True
+
 import json
 
 import parser
@@ -13,7 +15,8 @@ def hello_world():
 @app.route('/parse', methods=['POST'])
 def parse():
 	text = request.form["text"]
-	return json.dumps({'output': parser.parse(clean.clean(text))})
+	cleaned = clean.clean(text)
+	return json.dumps({'output': parser.parse(cleaned[0]), 'pairs': cleaned[1]})
 
 if __name__ == '__main__':
 	app.run()

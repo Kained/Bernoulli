@@ -9,9 +9,27 @@ def clean(text):
 	"are": "r",
 	"each": "e",
 	"tx": "dx",
-	"girl": "integral"}
+	"girl": "integral",
+	"song": "sum",
+	"son": "sum",
+	"x-squared": "x squared",
+	"love": "of",
+	"and": "n"}
+
+	pairs = []
 
 	for key in dictionary.keys():
-		text = text.replace(key, dictionary[key])
+		try:
+			i = text.index(" " + key)
+		except:
+			try:
+				j = text.index(key + " ")
+			except:
+				pass
+			else:
+				continue
+		else:
+			pairs.append([key, dictionary[key]])
+			text = text.replace(key, dictionary[key])
 
-	return text
+	return [text, pairs]
