@@ -63,29 +63,11 @@
 											mathOutput = data["output"];
 										}
 										else {
-											if(mathOutput.indexOf(data) < 0) {
+											if(mathOutput.indexOf(dataOutput) < 0) {
 												mathOutput += "\\\\ \n" + data["output"];
 											}
 										}
 										
-										// rm duplicates in pairs
-
-										var deletionIndices = [];
-										for(var i = 0; i < pairs.length; i++) {
-											for(var j = 0; j < pairs.length; j++) {
-												if(pairs[i] == pairs[j]) {
-													deletionIndices.push(j);
-												}
-											}
-										}
-
-										var newPairs = [];
-										for(var i = 0; i < pairs.length; i++) {
-											if(deletionIndices.indexOf(i) < 0) {
-												newPairs.push(pair);
-											}
-										}
-
 										pairs = data["pairs"];
 									});
 								});
