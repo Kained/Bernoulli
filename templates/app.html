@@ -14,10 +14,14 @@
 			      displayMath: [ ['$$', '$$']]
 			    },
 			  });
-			$("#check").hide();
 			$(".prompt").hide();
 			$(".output").hide();
-			$("#start").click(function() {
+
+			var startProcess = function() {
+
+				$(".output").fadeOut();
+				$("#check").hide();
+				$(".prompt-text").text("");
 
 				// fade out, fade in and begin speech recognition
 
@@ -41,6 +45,7 @@
 													$(".output-container").text("$$" + mathOutput + "$$");
 													$(".output-editor-textarea").val(mathOutput);
 													MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+													$("#another").click(startProcess);
 												});
 											});
 										}, 1500);
@@ -57,12 +62,14 @@
 						recognition.start();
 					});
 				});
-			});
+			};
+
+			$("#start").click(startProcess);
 		});
 		</script>
 		<script src="/static/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="/static/css/bootstrap.min.css"/>
-		<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:100,400,500' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:100,400,500,700' rel='stylesheet' type='text/css'>
 		<style>
 		.top-bar {
 			background-color:#e6ffd8;

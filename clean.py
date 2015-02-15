@@ -9,7 +9,8 @@ def clean(text):
 	"are": "r",
 	"each": "e",
 	"tx": "dx",
-	"girl": "integral"}
+	"girl": "integral",
+	"x-squared": "x squared"}
 
 	for key in dictionary.keys():
 		text = text.replace(key, dictionary[key])
