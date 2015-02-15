@@ -14,7 +14,9 @@ def clean(text):
 	"son": "sum",
 	"x-squared": "x squared",
 	"love": "of",
-	"and": "n", "capitalize":"capital I"}
+	"and": "n", "capitalize":"capital I",
+   "factor":"vector","ed":"e",".":" dot",
+   "me":"mu","psy ":"psi ","psychology get":"psi conjugate","":""}
 
 	pairs = []
 
