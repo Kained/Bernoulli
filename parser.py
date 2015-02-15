@@ -103,8 +103,11 @@ def parse(string):
             st[i] = "={"
       if s =="tau":
          st[st.index("tau")] = "\\tau "
-      if s =="squareroot":
-         st[st.index("squareroot")] = "\\sqrt "
+      if (s =="squareroot")|("squrroot"):
+         try:
+           st[st.index("squareroot")] = "\\sqrt "
+         except:
+           st[st.index("squrroot")] = "\\sqrt "
       if s =="alpha":
          st[st.index("alpha")] = "\\alpha "
       if s =="double":
@@ -330,7 +333,6 @@ def parse(string):
          st[st.index("delta")] = "\\delta "
       if s=="plus":
          st[st.index("plus")] = "+"
-
 
 
 
