@@ -300,8 +300,8 @@ def parse(string):
       string_output+=s
 
    string_output+=(string_output.count("{")-string_output.count("}"))*"}"
-   print string_output #only for testing
+   #print string_output #only for testing
    return string_output
 
 
-parse(sys.argv[1]) #ONLY FOR TESTING
+#parse(sys.argv[1]) #ONLY FOR TESTING
