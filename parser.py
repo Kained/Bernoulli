@@ -25,16 +25,32 @@ def parse(string):
       if s =="to":
          st[st.index("to")] = "^"
       if s =="of":
-         st[st.index("of")] = "{"
+         i=0
+         j=0
+         for str in st:
+            i+=str.count("{")
+            j+=str.count("}")
+            k=i-j # close all
+         if k<0:
+            k=0
+         st[st.index("of")] =k*"}"+ "{"
       if s =="negative":
          st[st.index("negative")] = "-"
 
       if s =="over":
-         st[st.index("over")] = "\\over "
+         i=0
+         j=0
+         for str in st:
+            i+=str.count("{")
+            j+=str.count("}")
+            k=i-j-1 # close all but one
+         if k<0: 
+            k=0    
+         st[st.index("over")] = "\\over " + (k)*"}"
       if s =="curl":
          st[st.index("curl")] = "\\del\\cdot "
       if s =="equals":
-         st[st.index("equals")] = "="
+         st[st.index("equals")] = "={"
       if s =="vector":
          st[st.index("vector")] = "\\vec "
       if s =="cross":
@@ -78,7 +94,13 @@ def parse(string):
            st[i] = "\\frac{d}{" + st[i+1] + "}" 
            st[i+1] = ""
       if s =="is":
-         st[st.index("is")] = "="
+         i=st.index("is")
+         if st[i+1] == "equal":
+            st[i+1:i+3] = ""
+         if (st[i+1] == "less") | (st[i+1] == "greater"):
+            st[i] = ""
+         else:
+            st[i] = "={"
       if s =="tau":
          st[st.index("tau")] = "\\tau "
       if s =="squareroot":
@@ -112,7 +134,7 @@ def parse(string):
 
       if s=="capital":
          i=st.index("capital")
-         st[i+1] = st[i+1].upper()
+         st[i+1] = st[i+1][0].upper()
          st[i] = ""
       if s=="sub":
          st[st.index("sub")] = "_"
@@ -122,6 +144,195 @@ def parse(string):
          st[st.index("dot")] = "\cdot "
       if s=="times":
          st[st.index("times")] = "*" # personal preference, be quiet
+      if s=="first":
+         i=st.index("first")
+         if st[i+1] == "derivative": # first derivative of y with respect to/ in terms of x
+            if (st[i+5] == "respect") | (st[i+6] == "terms"):
+               st[i] = "\\frac{d "+ st[i+3]  +"}{d"+st[i+7]+"}"
+               st[i+1:i+8] = ""
+            else: # assume in terms of x 
+               st[i] = "\\frac{d}{dx}"
+               st[i+1:i+3] = ""      
+      if s=="second":
+         i=st.index("second")    
+         if st[i+1] == "derivative": 
+            if st[i+5] == "respect":    
+               st[i] = "\\frac{d "+ st[i+3]  +"}{d"+st[i+7]+"}"
+               st[i+1:i+8] = ["","","","","","",""]  
+            if st[i+5] == "terms":                     
+               st[i] = "\\frac{d "+ st[i+3]  +"}{d"+st[i+7]+"}"
+               st[i+1:i+8] = ["","","","","","",""]
+            else: 
+               st[i] = "\\frac{d}{dx}"    
+               st[i+1:i+3] = ""
+      if s=="third":
+         i=st.index("third")    
+         if st[i+1] == "derivative":
+            if (st[i+5] == "respect") | (st[i+5] == "terms"):    
+               st[i] = "\\frac{d "+ st[i+3]  +"}{d"+st[i+7]+"}"
+               st[i+1:i+8] = ""  
+            else: 
+               st[i] = "\\frac{d}{dx}"    
+               st[i+1:i+3] = ""     
+      if s=="partial":
+         i=st.index("partial")
+         if st[i+1] == "derivative": # first derivative of y with respect to/ in terms of x
+            if (st[i+5] == "respect") | (st[i+6] == "terms"):
+               st[i] = "\\frac{\partial "+ st[i+3]  +"}{\partial "+st[i+7]+"}"
+               st[i+1:i+8] = ""
+            else: # assume in terms of x 
+               st[i] = "\\frac{\partial}{\partial x}"
+               st[i+1:i+3] = ""
+
+
+      if s=="conjugate":
+         st[st.index("conjugate")] = "^*"
+      if s=="absolute":
+         i=st.index("absolute")
+         if st[i+1] == "value":
+            st[i] = "\\abs{"
+            st[i+1] = ""
+      if s=="not":   
+         st[st.index("not")] = "_0 "     
+      if s=="sine":
+         st[st.index("sine")] = "\\sin "
+      if s=="cosine":
+         st[st.index("cosine")] = "\\cos "
+      if s=="tangent":
+         st[st.index("tangent")] = "\\tan "
+      if s=="arcsine":
+         st[st.index("arcsine")] = "\\arcsin "
+      if s=="arccosine":
+         st[st.index("arccosine")] = "\\arccos "
+      if s=="arctangent":
+         st[st.index("arctangent")] = "\\arctan "
+      if s=="secant":
+         st[st.index("secant")] = "\\sec "
+      if s=="cosecant":
+         st[st.index("cosecant")] = "\\csc "
+      if s=="cotangent":
+         st[st.index("cotangent")] = "\\cot "
+      if s=="arcsecant":
+         st[st.index("arcsecant")] = "\\arcsec "
+      if s=="arccosecant":
+         st[st.index("arccosecant")] = "\\arccsc "
+      if s=="arccotangent":
+         st[st.index("arccotangent")] = "\\arccot "
+      if s=="limit":
+         st[st.index("limit")] = "\\lim "
+      if s=="as":
+         st[st.index("as")] = "_{ "
+      if s=="approaches":
+         st[st.index("approaches")] = "\\rightarrow "
+      if s=="root": 
+         i=st.index("root")
+         if st[i-1] == "second":
+            st[i-1] = "\\sqrt[2]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif (st[i-1] == "third")|(st[i-1]=="cube"):
+            st[i-1] = "\\sqrt[3]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "fourth":
+            st[i-1] = "\\sqrt[4]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "fifth":
+            st[i-1] = "\\sqrt[5]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "sixth":
+            st[i-1] = "\\sqrt[6]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "seventh":
+            st[i-1] = "\\sqrt[7]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "eighth":
+            st[i-1] = "\\sqrt[8]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "ninth":
+            st[i-1] = "\\sqrt[9]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+      if s=="product":
+         st[st.index("product")] = "\\prod " 
+      if s=="less":
+         i=st.index("less")
+         if st[i+1] == "than":
+            if st[i+3] == "equal":
+               st[i] = "\\leq "
+               st[i+1:i+5] =""
+            else:
+               st[i] = "<"
+               st[i+1:i+3]=""
+      if s=="greater":
+         i=st.index("greater")
+         if st[i+1] == "than":
+            if st[i+3] == "equal":
+               st[i] = "\\geq "
+               st[i+1:i+5] =""
+            else:
+               st[i] = ">"
+               st[i+1:i+3]=""
+      if s=="comma":
+         st[st.index("comma")] = ","
+      if s=="at":
+         st[st.index("at")] = "\\mid_{"
+      if s=="epsilon":
+         st[st.index("epsilon")] = "\\epsilon"
+      if s=="zeta":
+         st[st.index("zeta")] = "\\zeta"
+      if s=="eta":
+         st[st.index("eta")] = "\\eta"
+      if s=="theta":
+         st[st.index("theta")] = "\\theta"
+      if s=="iota":
+         st[st.index("iota")] = "\\iota"
+      if s=="kappa":
+         st[st.index("kappa")] = "\\kappa"
+      if s=="lambda":
+         st[st.index("lambda")] = "\\lambda"
+      if s=="mu":
+         st[st.index("mu")] = "\\mu"
+      if s=="nu":
+         st[st.index("nu")] = "\\nu"
+      if s=="xi":
+         st[st.index("xi")] = "\\xi"
+      if s=="omicron":
+         st[st.index("omicron")] = "\\omicron"
+      if s=="pi":
+         st[st.index("pi")] = "\\pi"
+      if s=="rho":
+         st[st.index("rho")] = "\\rho"
+      if s=="sigma":
+         st[st.index("sigma")] = "\\sigma"
+      if s=="upsilon":
+         st[st.index("upsilon")] = "\\upsilon"
+      if s=="phi":
+         st[st.index("phi")] = "\\phi"
+      if s=="chi":
+         st[st.index("chi")] = "\\chi"
+      if s=="omega":
+         st[st.index("omega")] = "\\omega"
+      if s=="sigma":
+         st[st.index("sigma")] = "\\sigma"
+      if s=="delta":
+         st[st.index("delta")] = "\\delta"
+
+
+
 
 
    string_output = ""
