@@ -56,8 +56,8 @@
 
 													for(var i = 0; i < pairs.length; i++) {
 														var li = document.createElement("li");
-														var id = "pairs[i][0]+pairs[i][1]";
-														li.setAttribute("id", )
+														var id = pairs[i][0]+pairs[i][1];
+														li.setAttribute("id", id)
 														li.appendChild(document.createTextNode('We detected "' + pairs[i][0] + '", but we think you meant "' + pairs[i][1] + '".'));
 														if($("#"+id).length == 0) {
 															$("#pairs").append(li);
