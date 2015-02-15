@@ -210,8 +210,68 @@ def parse(string):
          st[st.index("as")] = "_{ "
       if s=="approaches":
          st[st.index("approaches")] = "\\rightarrow "
-
-
+      if s=="root": 
+         i=st.index("root")
+         if st[i-1] == "second":
+            st[i-1] = "\\sqrt[2]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif (st[i-1] == "third")|(st[i-1]=="cube"):
+            st[i-1] = "\\sqrt[3]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "fourth":
+            st[i-1] = "\\sqrt[4]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "fifth":
+            st[i-1] = "\\sqrt[5]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "sixth":
+            st[i-1] = "\\sqrt[6]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "seventh":
+            st[i-1] = "\\sqrt[7]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "eighth":
+            st[i-1] = "\\sqrt[8]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+         elif st[i-1] == "ninth":
+            st[i-1] = "\\sqrt[9]{"
+            st[i] = ""
+            if st[i+1] == "of":
+               st[i+1] = ""
+      if s=="product":
+         st[st.index("product")] = "\\prod " 
+      if s=="less":
+         i=st.index("less")
+         if st[i+1] == "than":
+            if st[i+3] == "equal":
+               st[i] = "\\leq "
+               st[i+1:i+5] =""
+            else:
+               st[i] = "<"
+               st[i+1:i+3]=""
+      if s=="greater":
+         i=st.index("greater")
+         if st[i+1] == "than":
+            if st[i+3] == "equal":
+               st[i] = "\\geq "
+               st[i+1:i+5] =""
+            else:
+               st[i] = ">"
+               st[i+1:i+3]=""
 
    string_output = ""
    for s in st:
