@@ -290,6 +290,46 @@ def parse(string):
          st[st.index("comma")] = ","
       if s=="at":
          st[st.index("at")] = "\mid_{"
+      if s=="epsilon":
+         st[st.index("epsilon")] = "\\epsilon"
+      if s=="zeta":
+         st[st.index("zeta")] = "\\zeta"
+      if s=="eta":
+         st[st.index("eta")] = "\\eta"
+      if s=="theta":
+         st[st.index("theta")] = "\\theta"
+      if s=="iota":
+         st[st.index("iota")] = "\\iota"
+      if s=="kappa":
+         st[st.index("kappa")] = "\\kappa"
+      if s=="lambda":
+         st[st.index("lambda")] = "\\lambda"
+      if s=="mu":
+         st[st.index("mu")] = "\\mu"
+      if s=="nu":
+         st[st.index("nu")] = "\\nu"
+      if s=="xi":
+         st[st.index("xi")] = "\\xi"
+      if s=="omicron":
+         st[st.index("omicron")] = "\\omicron"
+      if s=="pi":
+         st[st.index("pi")] = "\\pi"
+      if s=="rho":
+         st[st.index("rho")] = "\\rho"
+      if s=="sigma":
+         st[st.index("sigma")] = "\\sigma"
+      if s=="upsilon":
+         st[st.index("upsilon")] = ","
+      if s=="phi":
+         st[st.index("phi")] = "mid_{"
+      if s=="chi":
+         st[st.index("chi")] = "\\chi"
+      if s=="omega":
+         st[st.index("omega")] = "\\omega"
+      if s=="sigma":
+         st[st.index("sigma")] = "\\sigma"
+      if s=="delta":
+         st[st.index("delta")] = "\\delta"
 
 
 
