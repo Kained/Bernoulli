@@ -7,7 +7,9 @@ def clean(text):
 	"square root": "squareroot",
 	"end": "n",
 	"are": "r",
-	"each": "e"}
+	"each": "e",
+	"tx": "dx",
+	"girl": "integral"}
 
 	for key in dictionary.keys():
 		text = text.replace(key, dictionary[key])
